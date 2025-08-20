@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unlock Trợ Năng</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      color: #f9fafb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .glass {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow:
+        inset 0 0 0.5px rgba(255,255,255,0.2),
+        0 8px 32px rgba(0,0,0,0.4);
+      overflow: hidden;
+      transition: transform .3s ease, box-shadow .3s ease;
+      width: 100%;
+      max-width: 400px;
+    }
+    .glass:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    }
+    .switch { position: relative; display: inline-block; width:50px; height:28px; }
+    .switch input { opacity:0; width:0; height:0; }
+    .slider { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0;
+      background:#ccc; transition:.4s; border-radius:34px; }
+    .slider:before { position:absolute; content:''; height:22px; width:22px;
+      left:3px; bottom:3px; background:#fff; transition:.4s; border-radius:50%;
+      box-shadow:0 2px 4px rgba(0,0,0,0.2); }
+    input:checked + .slider { background:#3b82f6; }
+    input:checked + .slider:before { transform:translateX(22px); }
+    #notification {
+      position: fixed; bottom:6rem; left:50%; transform:translateX(-50%) scale(.95);
+      background: linear-gradient(135deg, #22c55e, #10b981);
+      color:#fff; padding:.75rem 1rem; border-radius:1rem; box-shadow:0 8px 24px rgba(0,0,0,0.3);
+      opacity:0; transition: all .4s ease;
+      max-width: 90%;
+    }
+    #notification.show { opacity:1; transform:translateX(-50%) scale(1); }
+  </style>
+</head>
+<body>
+
+  <div id="app" class="glass p-6 space-y-6">
+    <!-- LOGIN FORM -->
+    <div id="loginForm" class="space-y-4">
+      <h2 class="text-2xl font-semibold flex items-center justify-center">
+        <i class="bx bxs-lock text-yellow-400 mr-2"></i>Đăng nhập
+      </h2>
+      <div class="relative">
+        <input
+          type="password"
+          id="passwordInput"
+          placeholder="Nhập mật khẩu..."
+          class="w-full p-2 pr-10 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <i
+          id="togglePass"
+          class="bx bx-show absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-200 cursor-pointer"
+        ></i>
+      </div>
+      <button
+        id="loginBtn"
+        class="w-full py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl shadow-md hover:from-blue-600 hover:to-indigo-600 transition duration-300"
+      >🔐 Đăng nhập</button>
+    </div>
+
+    <!-- MAIN PANEL -->
+    <div id="panel" class="hidden space-y-4">
+      <div class="flex justify-between items-center p-4 bg-opacity-20 bg-white rounded-lg">
+        <div class="flex items-center">
+          <i class="bx bxs-lock-open-alt text-2xl mr-3"></i>
+          <div>
+            <p class="font-semibold">Unlock Trợ Năng</p>
+            <p class="text-xs text-gray-300">iOS 14–26 beta</p>
+          </div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" class="setting-switch"/>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="flex justify-between items-center p-4 bg-opacity-20 bg-white rounded-lg">
+        <div class="flex items-center">
+          <i class="bx bx-target-lock text-xl mr-3"></i><span>Aimlock</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" class="setting-switch"/>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="flex justify-between items-center p-4 bg-opacity-20 bg-white rounded-lg">
+        <div class="flex items-center">
+          <i class="bx bx-radar text-xl mr-3"></i><span>No Recoil</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" class="setting-switch"/>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="p-4 space-y-3 bg-opacity-20 bg-white rounded-lg">
+        <h2 class="font-semibold flex items-center">
+          <i class="bx bx-tachometer text-yellow-500 mr-2"></i>Panel iOS
+        </h2>
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span>Tốc độ con trỏ: <span class="slider-value text-green-400">0.01</span></span>
+          </div>
+          <input type="range" min="0" max="120" step="0.01" value="0.01"
+            class="slider-input w-full h-2 bg-gray-300 rounded-lg cursor-pointer"/>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span>Fix nặng tâm: <span class="slider-value text-green-400">0.01</span></span>
+          </div>
+          <input type="range" min="0" max="100" step="0.01" value="0.01"
+            class="slider-input w-full h-2 bg-gray-300 rounded-lg cursor-pointer"/>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span>Bám đầu: <span class="slider-value text-green-400">0.01</span></span>
+          </div>
+          <input type="range" min="0" max="100" step="0.01" value="0.01"
+            class="slider-input w-full h-2 bg-gray-300 rounded-lg cursor-pointer"/>
+        </div>
+        <button
+          id="saveBtn"
+          class="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-2 rounded-xl shadow-md hover:from-blue-600 hover:to-indigo-600 transition duration-300 disabled:opacity-50"
+          disabled
+        >💾 Lưu Cài Đặt</button>
+      </div>
+      <p class="text-center text-xs text-gray-400 mt-4">designed by LamineDaCoder</p>
+    </div>
+  </div>
+
+  <!-- NOTIFICATION -->
+  <div id="notification">
+    <div class="flex items-center space-x-3">
+      <i class="bx bx-check-circle text-2xl"></i>
+      <span class="text-sm">
+        ✅ Cài đặt đã được lưu thành công!<br>
+        Hãy mở <strong>Free Fire</strong> và trải nghiệm thôi nào!<br>
+        BY LAMINE
+      </span>
+    </div>
+  </div>
+
+  <script>
+    const CORRECT = 'LamineDemo';
+    const loginForm    = document.getElementById('loginForm');
+    const panel        = document.getElementById('panel');
+    const loginBtn     = document.getElementById('loginBtn');
+    const pwdInput     = document.getElementById('passwordInput');
+    const togglePass   = document.getElementById('togglePass');
+    const saveBtn      = document.getElementById('saveBtn');
+    const notification = document.getElementById('notification');
+    const switches     = document.querySelectorAll('.setting-switch');
+    const sliders      = document.querySelectorAll('.slider-input');
+
+    // nếu đã login trước đó
+    if (localStorage.getItem('lamine_pass') === CORRECT) {
+      loginForm.classList.add('hidden');
+      panel.classList.remove('hidden');
+    }
+
+    togglePass.addEventListener('click', () => {
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        togglePass.className = 'bx bx-hide absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer';
+      } else {
+        pwdInput.type = 'password';
+        togglePass.className = 'bx bx-show absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer';
+      }
+      pwdInput.focus();
+    });
+
+    loginBtn.addEventListener('click', () => {
+      if (pwdInput.value.trim() === CORRECT) {
+        localStorage.setItem('lamine_pass', CORRECT);
+        loginForm.classList.add('hidden');
+        panel.classList.remove('hidden');
+      } else {
+        pwdInput.classList.add('ring-2','ring-red-500','animate-shake');
+        setTimeout(() => {
+          pwdInput.classList.remove('ring-2','ring-red-500','animate-shake');
+        }, 600);
+      }
+    });
+
+    // khôi phục cấu hình
+    const saved = JSON.parse(localStorage.getItem('panelConfig'));
+    if (saved) {
+      switches.forEach((sw,i) => sw.checked = saved.switches[i]);
+      sliders.forEach((sl,i) => {
+        sl.value = saved.sliders[i];
+        sl.closest('div').querySelector('.slider-value')
+          .textContent = parseFloat(sl.value).toFixed(2);
+      });
+    }
+
+    let initialState = {
+      switches: Array.from(switches).map(sw => sw.checked),
+      sliders:  Array.from(sliders).map(sl => parseFloat(sl.value).toFixed(2))
+    };
+
+    function checkChanges() {
+      const sc = Array.from(switches).some((sw,i)=> sw.checked !== initialState.switches[i]);
+      const lc = Array.from(sliders).some((sl,i)=> parseFloat(sl.value).toFixed(2) !== initialState.sliders[i]);
+      saveBtn.disabled = !(sc || lc);
+    }
+
+    switches.forEach(sw => sw.addEventListener('change', checkChanges));
+    sliders.forEach(sl => {
+      sl.addEventListener('input', () => {
+        sl.closest('div').querySelector('.slider-value')
+          .textContent = parseFloat(sl.value).toFixed(2);
+        checkChanges();
+      });
+    });
+
+    saveBtn.addEventListener('click', () => {
+      notification.classList.add('show');
+      setTimeout(() => notification.classList.remove('show'), 3500);
+      initialState = {
+        switches: Array.from(switches).map(sw => sw.checked),
+        sliders:  Array.from(sliders).map(sl => parseFloat(sl.value).toFixed(2))
+      };
+      saveBtn.disabled = true;
+      localStorage.setItem('panelConfig', JSON.stringify(initialState));
+    });
+  </script>
+
+</body>
+</html>
